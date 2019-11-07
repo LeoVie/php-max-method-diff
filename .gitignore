@@ -1,2 +1,6 @@
 .idea/
 composer.lock
+bin/
+*.cache
+vendor/
+build/coverage

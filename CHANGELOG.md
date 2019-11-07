@@ -1,3 +1,6 @@
+## 1.0.4 (November 07, 2019)
+  - Add getters to MethodDiff
+
 ## 1.0.3 (November 07, 2019)
   - Fix php version in composer.json
 

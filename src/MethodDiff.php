@@ -7,8 +7,20 @@ use SebastianBergmann\Diff\Differ;
 class MethodDiff
 {
     private $name;
+
+    /** @var string */
+    private $expectedContent;
+
+    /** @var string */
+    private $actualContent;
+
+    /** @var string */
     private $diff;
+
+    /** @var int */
     private $deletedLines = 0;
+
+    /** @var int */
     private $addedLines = 0;
 
     /** @var Differ */
@@ -18,14 +30,14 @@ class MethodDiff
     {
         $this->name = $name;
 
+        $this->expectedContent = $this->normalizeLineEndings($expectedContent);
+        $this->actualContent = $this->normalizeLineEndings($actualContent);
+
         $this->differ = new Differ();
 
-        $expectedContent = $this->normalizeLineEndings($expectedContent);
-        $actualContent = $this->normalizeLineEndings($actualContent);
+        $this->diff = $this->differ->diff($this->expectedContent, $this->actualContent);
 
-        $this->diff = $this->differ->diff($expectedContent, $actualContent);
-
-        $this->determineLineDiffs($expectedContent, $actualContent);
+        $this->determineLineDiffs();
     }
 
     private function normalizeLineEndings(string $expectedContent): string
@@ -34,9 +46,9 @@ class MethodDiff
         return $expectedContent;
     }
 
-    private function determineLineDiffs(string $expectedContent, string $actualContent): void
+    private function determineLineDiffs(): void
     {
-        $diffLines = $this->differ->diffToArray($expectedContent, $actualContent);
+        $diffLines = $this->differ->diffToArray($this->expectedContent, $this->actualContent);
         foreach ($diffLines as $diffLine) {
             if ($diffLine[1] === 2) {
                 $this->deletedLines++;
@@ -64,5 +76,15 @@ class MethodDiff
     public function getDiff(): string
     {
         return $this->diff;
+    }
+
+    public function getExpectedContent(): string
+    {
+        return $this->expectedContent;
+    }
+
+    public function getActualContent(): string
+    {
+        return $this->actualContent;
     }
 }

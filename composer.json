@@ -1,5 +1,6 @@
 {
   "name": "leovie/php-max-method-diff",
+  "license": "BSD-3-Clause",
   "config": {
     "bin-dir": "bin",
     "platform": {

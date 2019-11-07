@@ -1,0 +1,16 @@
+{
+  "name": "leovie/php-max-method-diff",
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {
+      "LeoVie\\PHPMaxMethodDiff\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LeoVie\\PHPMaxMethodDiff\\Tests\\": "tests/"
+    }
+  }
+}
